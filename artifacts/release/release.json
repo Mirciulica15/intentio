@@ -1,0 +1,36 @@
+{
+  "issued_at": 1759761545,
+  "candidate_sha256": "8604d652d5e14402c583beaf008c72803af6015fcb0e2ca6e944430c164fa3af",
+  "intent": "intent\\examples\\intent.support-triage.yaml",
+  "metrics": "artifacts\\acceptance\\metrics.json",
+  "canary": {
+    "sample_size": 50,
+    "rollback_on": [
+      "kpi_breach",
+      "policy_violation"
+    ]
+  },
+  "human_signoff": {
+    "approved": true,
+    "reviewer": "Mircea Talu",
+    "notes": "Looks good.",
+    "timestamp": 1759761531
+  },
+  "source_files": [
+    "src\\idc\\__init__.py",
+    "src\\idc\\acceptance.py",
+    "src\\idc\\agent_iface.py",
+    "src\\idc\\audit.py",
+    "src\\idc\\canary.py",
+    "src\\idc\\cli.py",
+    "src\\idc\\contract.py",
+    "src\\idc\\execution.py",
+    "src\\idc\\gate.py",
+    "src\\idc\\hgate.py",
+    "src\\idc\\policy.py",
+    "src\\idc\\sandbox.py",
+    "src\\idc\\signoff.py",
+    "src\\idc\\tools.py"
+  ],
+  "status": "approved"
+}

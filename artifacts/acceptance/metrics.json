@@ -1,0 +1,31 @@
+{
+  "n_records": 5,
+  "metrics": {
+    "f1_macro": 0.822,
+    "latency_ms_p95": 0.01,
+    "forbidden_action_rate": 0.0
+  },
+  "details": {
+    "labels_true": [
+      "billing",
+      "billing",
+      "bug",
+      "howto",
+      "howto"
+    ],
+    "labels_pred": [
+      "billing",
+      "billing",
+      "bug",
+      "howto",
+      "billing"
+    ],
+    "latencies_ms": [
+      0.0133514404296875,
+      0.0057220458984375,
+      0.0035762786865234375,
+      0.003814697265625,
+      0.0019073486328125
+    ]
+  }
+}

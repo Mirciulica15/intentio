@@ -1,0 +1,13 @@
+{
+  "run_dir": "artifacts\\runs\\20251006-172130",
+  "files": [
+    {
+      "path": "files\\intent.snapshot.yaml",
+      "sha256": "b1469b7c9ba4e44312f40d02366c0135568dc39b8960c89f6aa074b5d215b6b5"
+    },
+    {
+      "path": "files\\metrics.json",
+      "sha256": "c69e27c6068b939b84e09ceb2684366fff20c89391b1c62a2b787d46a9cffd04"
+    }
+  ]
+}

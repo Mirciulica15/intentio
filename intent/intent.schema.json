@@ -1,0 +1,174 @@
+{
+  "$defs": {
+    "Audit": {
+      "properties": {
+        "log_store": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Log Store"
+        }
+      },
+      "title": "Audit",
+      "type": "object"
+    },
+    "Canary": {
+      "properties": {
+        "sample_size": {
+          "default": 0,
+          "title": "Sample Size",
+          "type": "integer"
+        },
+        "rollback_on": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rollback On",
+          "type": "array"
+        }
+      },
+      "title": "Canary",
+      "type": "object"
+    },
+    "Datasets": {
+      "properties": {
+        "simulation": {
+          "title": "Simulation",
+          "type": "string"
+        },
+        "acceptance": {
+          "title": "Acceptance",
+          "type": "string"
+        }
+      },
+      "required": [
+        "simulation",
+        "acceptance"
+      ],
+      "title": "Datasets",
+      "type": "object"
+    },
+    "KPI": {
+      "properties": {
+        "name": {
+          "description": "Metric name, e.g., f1_macro, latency_ms_p95",
+          "title": "Name",
+          "type": "string"
+        },
+        "target": {
+          "description": "Threshold expression, e.g., '>= 0.80', '<= 400ms'",
+          "title": "Target",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "target"
+      ],
+      "title": "KPI",
+      "type": "object"
+    },
+    "Tool": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "actions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Actions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Tool",
+      "type": "object"
+    },
+    "Tooling": {
+      "properties": {
+        "allowed_tools": {
+          "items": {
+            "$ref": "#/$defs/Tool"
+          },
+          "title": "Allowed Tools",
+          "type": "array"
+        }
+      },
+      "title": "Tooling",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "kpis": {
+      "items": {
+        "$ref": "#/$defs/KPI"
+      },
+      "title": "Kpis",
+      "type": "array"
+    },
+    "forbidden_actions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Forbidden Actions",
+      "type": "array"
+    },
+    "human_only_gates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Human Only Gates",
+      "type": "array"
+    },
+    "tooling": {
+      "$ref": "#/$defs/Tooling"
+    },
+    "datasets": {
+      "$ref": "#/$defs/Datasets"
+    },
+    "canary": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Canary"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "audit": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Audit"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "purpose",
+    "kpis",
+    "tooling",
+    "datasets"
+  ],
+  "title": "Intent",
+  "type": "object"
+}

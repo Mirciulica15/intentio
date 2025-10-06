@@ -1,0 +1,10 @@
+{"record_id": "e3", "action": {"tool": "issue_tracker", "name": "ticket.route", "args": {"queue": "bug", "id": "e3"}}, "result": {"ok": true, "effect": {"type": "route", "id": "e3", "to": "bug", "prev": null}}}
+{"record_id": "e3", "action": {"tool": "issue_tracker", "name": "ticket.tag", "args": {"tag": "pred:bug", "id": "e3"}}, "result": {"ok": true, "effect": {"type": "tag", "id": "e3", "tag": "pred:bug"}}}
+{"record_id": "e5", "action": {"tool": "issue_tracker", "name": "ticket.route", "args": {"queue": "billing", "id": "e5"}}, "result": {"ok": true, "effect": {"type": "route", "id": "e5", "to": "billing", "prev": null}}}
+{"record_id": "e5", "action": {"tool": "issue_tracker", "name": "ticket.tag", "args": {"tag": "pred:billing", "id": "e5"}}, "result": {"ok": true, "effect": {"type": "tag", "id": "e5", "tag": "pred:billing"}}}
+{"record_id": "e2", "action": {"tool": "issue_tracker", "name": "ticket.route", "args": {"queue": "billing", "id": "e2"}}, "result": {"ok": true, "effect": {"type": "route", "id": "e2", "to": "billing", "prev": null}}}
+{"record_id": "e2", "action": {"tool": "issue_tracker", "name": "ticket.tag", "args": {"tag": "pred:billing", "id": "e2"}}, "result": {"ok": true, "effect": {"type": "tag", "id": "e2", "tag": "pred:billing"}}}
+{"record_id": "e1", "action": {"tool": "issue_tracker", "name": "ticket.route", "args": {"queue": "billing", "id": "e1"}}, "result": {"ok": true, "effect": {"type": "route", "id": "e1", "to": "billing", "prev": null}}}
+{"record_id": "e1", "action": {"tool": "issue_tracker", "name": "ticket.tag", "args": {"tag": "pred:billing", "id": "e1"}}, "result": {"ok": true, "effect": {"type": "tag", "id": "e1", "tag": "pred:billing"}}}
+{"record_id": "e4", "action": {"tool": "issue_tracker", "name": "ticket.route", "args": {"queue": "howto", "id": "e4"}}, "result": {"ok": true, "effect": {"type": "route", "id": "e4", "to": "howto", "prev": null}}}
+{"record_id": "e4", "action": {"tool": "issue_tracker", "name": "ticket.tag", "args": {"tag": "pred:howto", "id": "e4"}}, "result": {"ok": true, "effect": {"type": "tag", "id": "e4", "tag": "pred:howto"}}}

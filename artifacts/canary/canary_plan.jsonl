@@ -1,0 +1,5 @@
+{"record_id": "e3", "actions": [{"tool": "issue_tracker", "name": "ticket.route", "args": {"queue": "bug"}}, {"tool": "issue_tracker", "name": "ticket.tag", "args": {"tag": "pred:bug"}}], "planned_at_ms": 1759761210618}
+{"record_id": "e5", "actions": [{"tool": "issue_tracker", "name": "ticket.route", "args": {"queue": "billing"}}, {"tool": "issue_tracker", "name": "ticket.tag", "args": {"tag": "pred:billing"}}], "planned_at_ms": 1759761210618}
+{"record_id": "e2", "actions": [{"tool": "issue_tracker", "name": "ticket.route", "args": {"queue": "billing"}}, {"tool": "issue_tracker", "name": "ticket.tag", "args": {"tag": "pred:billing"}}], "planned_at_ms": 1759761210618}
+{"record_id": "e1", "actions": [{"tool": "issue_tracker", "name": "ticket.route", "args": {"queue": "billing"}}, {"tool": "issue_tracker", "name": "ticket.tag", "args": {"tag": "pred:billing"}}], "planned_at_ms": 1759761210618}
+{"record_id": "e4", "actions": [{"tool": "issue_tracker", "name": "ticket.route", "args": {"queue": "howto"}}, {"tool": "issue_tracker", "name": "ticket.tag", "args": {"tag": "pred:howto"}}], "planned_at_ms": 1759761210618}

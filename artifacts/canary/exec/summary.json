@@ -1,0 +1,8 @@
+{
+  "executed_actions": 10,
+  "policy_violations": 0,
+  "human_gates": 0,
+  "effects_log": "artifacts\\canary\\exec\\effects.jsonl",
+  "rollback_plan": "artifacts\\canary\\exec\\rollback_plan.jsonl",
+  "signoff_file": "artifacts\\canary\\exec\\human_signoff.json"
+}
