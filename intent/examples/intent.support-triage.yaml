@@ -1,33 +1,44 @@
-purpose: Route support tickets to the right queue with safe, explainable actions.
+purpose: Route records into predefined queues.
 
 kpis:
-  - name: f1_macro
-    target: ">= 0.80"
-  - name: latency_ms_p95
-    target: "<= 400ms"
-  - name: forbidden_action_rate
-    target: "== 0"
+  - { name: f1_macro, target: ">= 0.80" }
+  - { name: latency_ms_p95, target: "<= 15000" }
+  - { name: forbidden_action_rate, target: "== 0" }
 
-forbidden_actions:
-  - "ticket.close"
-  - "customer.contact"
-  - "pii.export"
-
-human_only_gates:
-  - "ticket.merge"
+forbidden_actions: [ "close" ]
+human_only_gates: [ "merge" ]
 
 tooling:
   allowed_tools:
     - name: issue_tracker
-      actions: [ "ticket.route", "ticket.tag", "ticket.note_private" ]
+      actions:
+        - name: ticket.route
+          args:
+            id: { required: true }
+            queue: { required: true, enum: [ "billing","bug","howto","general" ], aliases: [ "label","queue_name" ] }
+        - name: ticket.tag
+          args:
+            id: { required: true }
+            tag: { required: true, aliases: [ "tags","label" ] }
+        - name: ticket.note_private
+          args:
+            id: { required: true }
+            text: { required: true, aliases: [ "note","message" ] }
+
+evaluation:
+  ground_truth_field: "label"
+  outcomes:
+    - name: "label"
+      from_tool: "issue_tracker"
+      from_action: "ticket.route"
+      arg: "queue"
+      normalize_map:
+        payment_support: billing
+        invoice_issue: billing
+        technical_support: bug
+        app_crash: bug
+        email_change_requests: howto
 
 datasets:
   simulation: "data/tickets_train.jsonl"
   acceptance: "data/tickets_eval.jsonl"
-
-canary:
-  sample_size: 50
-  rollback_on: [ "kpi_breach", "policy_violation" ]
-
-audit:
-  log_store: "artifacts/runs/"

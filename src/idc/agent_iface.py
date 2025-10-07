@@ -2,14 +2,9 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass
-from typing import Protocol, List, Dict, Any, TypedDict, Optional
+from typing import Protocol, List, Dict, Any, Mapping
 
-
-class Record(TypedDict, total=False):
-    text: str
-    label: Optional[str]
-    id: Optional[str]
-    meta: Dict[str, Any]
+Record = Mapping[str, Any]
 
 
 @dataclass

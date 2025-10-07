@@ -1,5 +1,0 @@
-{"record_id": "e4", "action": {"tool": "issue_tracker", "name": "ticket.route", "args": {"id": "e4", "queue": "general"}}, "result": {"ok": true, "effect": {"type": "route", "id": "e4", "to": "general", "prev": null}}}
-{"record_id": "e1", "action": {"tool": "issue_tracker", "name": "ticket.route", "args": {"id": "e1", "queue": "general"}}, "result": {"ok": true, "effect": {"type": "route", "id": "e1", "to": "general", "prev": null}}}
-{"record_id": "e3", "action": {"tool": "issue_tracker", "name": "ticket.route", "args": {"id": "e3", "queue": "general"}}, "result": {"ok": true, "effect": {"type": "route", "id": "e3", "to": "general", "prev": null}}}
-{"record_id": "e5", "action": {"tool": "issue_tracker", "name": "ticket.route", "args": {"id": "e5", "queue": "general"}}, "result": {"ok": true, "effect": {"type": "route", "id": "e5", "to": "general", "prev": null}}}
-{"record_id": "e2", "action": {"tool": "issue_tracker", "name": "ticket.route", "args": {"id": "e2", "queue": "general"}}, "result": {"ok": true, "effect": {"type": "route", "id": "e2", "to": "general", "prev": null}}}

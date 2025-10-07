@@ -1,5 +1,0 @@
-{"record_id": "e3", "actions": [{"tool": "issue_tracker", "name": "ticket.route", "args": {"id": "e3", "queue": "general"}}]}
-{"record_id": "e5", "actions": [{"tool": "issue_tracker", "name": "ticket.route", "args": {"id": "e5", "queue": "general"}}]}
-{"record_id": "e2", "actions": [{"tool": "issue_tracker", "name": "ticket.route", "args": {"id": "e2", "queue": "general"}}]}
-{"record_id": "e1", "actions": [{"tool": "issue_tracker", "name": "ticket.route", "args": {"id": "e1", "queue": "general"}}]}
-{"record_id": "e4", "actions": [{"tool": "issue_tracker", "name": "ticket.route", "args": {"id": "e4", "queue": "general"}}]}

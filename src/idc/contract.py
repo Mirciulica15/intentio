@@ -21,13 +21,37 @@ class KPI(BaseModel):
         return v.strip()
 
 
-class Tool(BaseModel):
-    name: str
-    actions: List[str] = Field(default_factory=list)
+class ArgSpec(BaseModel):
+    required: bool = False
+    enum: Optional[List[str]] = None  # Allowed values
+    aliases: List[str] = Field(default_factory=list)  # Alternate arg names to accept/normalize from
+
+
+class ActionDef(BaseModel):
+    name: str  # e.g., "route"
+    args: Dict[str, ArgSpec] = Field(default_factory=dict)
+
+
+class ToolDef(BaseModel):
+    name: str  # e.g., "issue_tracker"
+    actions: List[ActionDef] = Field(default_factory=list)
 
 
 class Tooling(BaseModel):
-    allowed_tools: List[Tool] = Field(default_factory=list)
+    allowed_tools: List[ToolDef] = Field(default_factory=list)
+
+
+class OutcomeSpec(BaseModel):
+    name: str = Field(..., description="Outcome name used by KPIs, e.g., 'label'")
+    from_tool: str
+    from_action: str
+    arg: str = Field(..., description="Which arg to read as the outcome value")
+    normalize_map: Dict[str, str] = Field(default_factory=dict)  # optional canonicalization
+
+
+class Evaluation(BaseModel):
+    ground_truth_field: str = "label"  # field name in dataset for y_true
+    outcomes: List[OutcomeSpec] = Field(default_factory=list)
 
 
 class Datasets(BaseModel):
@@ -44,6 +68,11 @@ class Audit(BaseModel):
     log_store: Optional[str] = None
 
 
+class Domain(BaseModel):
+    enums: Dict[str, List[str]] = Field(default_factory=dict)  # you can reference these in ArgSpec.enum
+    synonyms: Dict[str, str] = Field(default_factory=dict)
+
+
 class Intent(BaseModel):
     purpose: str
     kpis: List[KPI]
@@ -53,6 +82,8 @@ class Intent(BaseModel):
     datasets: Datasets
     canary: Optional[Canary] = None
     audit: Optional[Audit] = None
+    domain: Optional[Domain] = None
+    evaluation: Optional[Evaluation] = None
 
 
 def load_intent(path: Path) -> Intent:

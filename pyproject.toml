@@ -12,7 +12,8 @@ dependencies = [
     "typer>=0.12",
     "rich>=13.7",
     "numpy>=2.3.3",
-    "scikit-learn>=1.7.2"
+    "scikit-learn>=1.7.2",
+    "openai>=2.2.0"
 ]
 
 [project.scripts]

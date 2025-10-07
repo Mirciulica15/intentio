@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from typing import Iterable, Dict, Any, List
 
+from .actions import validate_and_normalize_actions
 from .agent_iface import Agent, Record, PlanStep, now_ms
 from .contract import Intent
 
@@ -25,6 +26,7 @@ def dry_run(agent: Agent, intent: Intent, records: Iterable[Record]) -> List[Pla
     trace: List[PlanStep] = []
     for rec in records:
         actions = agent.plan(rec, intent)
+        actions = validate_and_normalize_actions(intent, str(rec.get("id", "")), actions)  # ← NEW
         trace.append(PlanStep(record_id=str(rec.get("id", "")), actions=actions, planned_at_ms=now_ms()))
     return trace
 

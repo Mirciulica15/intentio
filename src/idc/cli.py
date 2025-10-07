@@ -9,15 +9,16 @@ from rich.panel import Panel
 from rich.table import Table
 
 from idc.acceptance import evaluate, write_report
-from idc.agent_iface import SimpleRuleAgent
 from idc.audit import RunAudit, verify_manifest
 from idc.sandbox import summarize, load_jsonl, dry_run
 from . import signoff as signoff_mod
+from .agent_llm import LLMPlanner
 from .canary import prepare_canary as canary_prepare
 from .contract import load_intent, json_schema
 from .execution import run_canary as canary_run_exec, run_rollback as canary_run_rollback
 from .gate import decide_and_promote as gate_evaluate
 from .hgate import finalize as gate_finalize_fn
+from .llm import OpenAIBackend
 from .policy import check as policy_check
 from .signoff import DEFAULT_PATH as SIGNOFF_DEFAULT
 
@@ -68,6 +69,9 @@ def simulate(
         intent: Path = typer.Option(..., "--intent", help="Path to intent YAML"),
         sample: int = typer.Option(5, "--sample", help="Number of records to simulate"),
         dry_run_only: bool = typer.Option(True, "--dry-run/--no-dry-run", help="Dry-run only (no execution)"),
+        agent: str = typer.Option("rule", "--agent", help="rule | llm"),
+        model: str = typer.Option("gpt-4o-mini", "--model", help="LLM model name (when --agent llm)"),
+        temperature: float = typer.Option(0.2, "--temperature", help="LLM temperature"),
 ):
     try:
         intent_obj = load_intent(intent)
@@ -81,9 +85,15 @@ def simulate(
                          "Create a small JSONL with fields: text, (optional) id, (optional) label.", title="⚠️ Notice"))
         raise typer.Exit(2)
 
-    agent = SimpleRuleAgent()
+    if agent == "llm":
+        backend = OpenAIBackend()
+        agent_impl = LLMPlanner(backend, model=model, temperature=temperature)
+    else:
+        from .agent_iface import SimpleRuleAgent
+        agent_impl = SimpleRuleAgent()
+
     records = list(load_jsonl(sim_path, limit=sample))
-    trace = dry_run(agent, intent_obj, records)
+    trace = dry_run(agent_impl, intent_obj, records)
 
     table = Table(title="Dry-run Plan (first records)")
     table.add_column("Record ID")
@@ -130,6 +140,9 @@ def test(
         intent: Path = typer.Option(..., "--intent", help="Intent YAML file"),
         limit: int = typer.Option(None, "--limit", help="Limit number of records"),
         outdir: Path = typer.Option(Path("artifacts/acceptance"), "--outdir", help="Where to write metrics.json"),
+        agent: str = typer.Option("rule", "--agent", help="rule | llm"),
+        model: str = typer.Option("gpt-4o-mini", "--model", help="LLM model name (when --agent llm)"),
+        temperature: float = typer.Option(0.2, "--temperature", help="LLM temperature"),
 ):
     try:
         intent_obj = load_intent(intent)
@@ -142,8 +155,14 @@ def test(
         rprint(Panel.fit(f"[yellow]Acceptance dataset not found[/yellow]\nExpected: {eval_path}", title="⚠️ Notice"))
         raise typer.Exit(2)
 
-    agent = SimpleRuleAgent()
-    result = evaluate(agent, intent_obj, eval_path, limit=limit)
+    if agent == "llm":
+        backend = OpenAIBackend()
+        agent_impl = LLMPlanner(backend, model=model, temperature=temperature)
+    else:
+        from .agent_iface import SimpleRuleAgent
+        agent_impl = SimpleRuleAgent()
+
+    result = evaluate(agent_impl, intent_obj, eval_path, limit=limit)
     out = write_report(result, outdir)
 
     m = result["metrics"]
